@@ -53,7 +53,6 @@ const router = createRouter({
 // Guard de navegación para proteger las rutas
 router.beforeEach((to, from, next) => {
   const isAuthenticated = authService.isAuthenticated()
-
   if (to.path === '/' && !isAuthenticated) {
     next('/login')
   } else if (to.meta.requiresAuth && !isAuthenticated) {

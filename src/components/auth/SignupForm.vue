@@ -89,7 +89,6 @@ export default defineComponent({
       const validationErrors = validateForm()
 
       if (validationErrors.length === 0) {
-        // Lógica de registro simulada (almacenamiento local)
         const users = JSON.parse(localStorage.getItem('users') || '[]')
         const existingUser = users.find((user: any) => user.email === email.value)
 

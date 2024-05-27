@@ -98,7 +98,6 @@ export default defineComponent({
     })
 
     const totalPages = computed(() => {
-      // Asegurarse de que totalResults sea un número antes de calcular totalPages
       return isNaN(totalResults.value) ? 0 : Math.ceil(totalResults.value / 10)
     })
 
@@ -115,7 +114,7 @@ export default defineComponent({
         const response = await movieService.searchMovies(query, page, plot, searchType)
         if (response.Response === 'True' && Array.isArray(response.Search)) {
           movies.value = response.Search
-          totalResults.value = parseInt(response.totalResults ?? '0', 10) // Manejar NaN
+          totalResults.value = parseInt(response.totalResults ?? '0', 10)
           isLoading.value = false
         } else {
           movies.value = []
@@ -131,7 +130,7 @@ export default defineComponent({
     const previousPage = () => {
       if (currentPage.value > 1) {
         currentPage.value--
-        fetchMovies(searchQuery.value, currentPage.value, 'short', 's') // Pasa los parámetros
+        fetchMovies(searchQuery.value, currentPage.value, 'short', 's')
       }
     }
 
@@ -139,12 +138,12 @@ export default defineComponent({
       if (hasMorePages.value) {
         currentPage.value++
 
-        fetchMovies(searchQuery.value, currentPage.value, 'short', 's') // Pasa los parámetros
+        fetchMovies(searchQuery.value, currentPage.value, 'short', 's')
       }
     }
 
     const hasMorePages = computed(() => {
-      return currentPage.value < totalPages.value // Compara con totalPages
+      return currentPage.value < totalPages.value
     })
     let debounceTimeout: ReturnType<typeof setTimeout> | null = null
 
